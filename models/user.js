@@ -2,6 +2,7 @@ const mongoose =require('mongoose');
 const Joi=require('joi');
 const jwt=require('jsonwebtoken');
 const config=require('config');
+const { string } = require('joi');
 
 
 const userSchema =new mongoose.Schema({
@@ -29,7 +30,13 @@ const userSchema =new mongoose.Schema({
         maxlength:255,
         minlength:5,
         },
-    isAdmin:Boolean
+        image:
+        {
+             type:String,
+                // data: Buffer,
+                // contentType: String
+            
+        }
     // roles:[]
     // operation:[]
 
@@ -48,7 +55,7 @@ function validateUser(user){
         name: Joi.string().min(5).max(20).required(),
         email: Joi.string().min(5).max(255).required(),
         password:Joi.string().min(5).max(20).required(),
-
+        image:Joi.string().required(),
 
     });
     return validate = schema.validate(user);

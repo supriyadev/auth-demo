@@ -7,7 +7,7 @@ const {User} = require('../models/user');
 const mongoose = require('mongoose');
 const express = require('express');
 const config=require('config');
-const { route } = require('./users');
+// const { route } = require('./users');
 const router = express.Router();
 // console.log('hello');
 
@@ -22,8 +22,8 @@ router.post('/',async (req,res)=>{
   const validpassword=await  bcrypt.compare(req.body.password,user.password);
   if(!validpassword) return res.status(400).send('INVALID EMAIL and paasord');
 
-  const token =user.generateAuthToken(); 
-  res.send(token);
+//   const token =user.generateAuthToken(); 
+//   res.send(token);
     // user =new User({
     //    name:req.body.name,
     //    email:req.body.email,
@@ -38,9 +38,8 @@ router.post('/',async (req,res)=>{
 //    await user.save();
 //     res.send(user);
     
-  
-    // const token = user.generateAuthToken();
-    // res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
+const token =user.generateAuthToken(); 
+res.send(token);
 
 });
 function validate(req){
